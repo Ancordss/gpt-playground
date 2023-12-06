@@ -8,7 +8,7 @@ FROM golang:1.20 as builder
 WORKDIR /gpt-playground-api-files
 COPY --from=root-certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build server.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -o ./server .
 
 FROM scratch as final
 COPY --from=root-certs /etc/passwd /etc/passwd

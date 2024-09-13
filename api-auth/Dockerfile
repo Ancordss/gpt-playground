@@ -4,11 +4,11 @@ RUN apk add -U --no-cache ca-certificates
 RUN addgroup -g 1001 app
 RUN adduser app -u 1001 -D -G app /home/app
 
-FROM golang:1.20 as builder
+FROM golang:1.23.1 as builder
 WORKDIR /gpt-playground-api-files
 COPY --from=root-certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -o ./server cmd/api/main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./server cmd/api/main.go
 
 FROM scratch as final
 COPY --from=root-certs /etc/passwd /etc/passwd

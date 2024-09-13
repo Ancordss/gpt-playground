@@ -21,11 +21,13 @@ const (
 func NewAuth() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("No se pudo cargar el archivo .env, buscando en las variables del sistema")
 	}
 
+	// Obtener las variables de entorno
 	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
+
 
 	if googleClientId == "" || googleClientSecret == "" {
 		log.Fatal("Missing environment variables")

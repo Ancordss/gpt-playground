@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "hello-world"
+version = "0.1.0"
+description = ""
+authors = ["Alejandro Ponce <aponcetobias@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.3"
+
+[tool.poetry.scripts]
+hello-world = "hello_world:main"
+start-api = "app:app"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
